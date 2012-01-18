@@ -1,0 +1,8 @@
+# config/facebook.yml
+development:
+  app_id: 328044357228797
+  secret_key: d3f7a79f1dc5c52483fc9db1a984e519
+test:
+ ...
+production:
+  ...
