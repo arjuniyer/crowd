@@ -6,8 +6,8 @@ class EventsController < ApplicationController
   def index
     #@access_token = @facebook_cookies["access_token"]
 
-    @graph = Koala::Facebook::GraphAPI.new(session[:access_token])
-    @graph.get_object("me")
+    #@graph = Koala::Facebook::GraphAPI.new(session[:access_token])
+    #@graph.get_object("me")
     @events = Event.all
 
     respond_to do |format|

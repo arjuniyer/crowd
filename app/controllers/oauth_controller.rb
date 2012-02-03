@@ -1,15 +1,18 @@
 class OauthController < ApplicationController
 
-def start
-  session['oauth']= Koala::Facebook::OAuth.new(APP_ID, SECRET, CALLBACK)
-  redirect_to session['oauth'].url_for_oauth_code()
-end
+  def create
+    auth = request.env["omniauth.auth"]
+    user = User.find_by_provider_and_uid(auth["provider"], auth["uid"]) || User.create_with_omniauth(auth)
+    session[:user_id] = user.id
+    redirect_to root_url, :notice => "Signed in!"
+    #raise request.env["omniauth.auth"].to_yaml
+  end
 
-def callback
-  session[:access_token] = session['oauth'].get_access_token(params[:code])
-  redirect_to events_url
-end
 
+  def destroy
+  session[:user_id] = nil
+  redirect_to root_url, :notice => "Signed out!"
+end
 
 
 

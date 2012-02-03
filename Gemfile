@@ -4,9 +4,9 @@ gem 'rails', '3.0.7'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
-
+gem 'omniauth-facebook'
 gem 'sqlite3'
-gem 'koala'#, :git => 'git://github.com/arsduo/koala.git'
+gem 'koala', :git => 'git://github.com/arsduo/koala.git'
 # Use unicorn as the web server
 # gem 'unicorn'
 

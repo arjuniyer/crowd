@@ -1,7 +1,10 @@
 Crowd2::Application.routes.draw do
 
-  match "oauth/start"
-  match "oauth/callback"
+  root :to => "events#index"
+
+  match "/auth/:provider/callback" => "oauth#create"
+  match "/signout" => "oauth#destroy", :as => :signout
+
 
   resources :events
 

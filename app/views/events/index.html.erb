@@ -1,5 +1,5 @@
 <h1>Listing events</h1>
-<% if @facebook_cookies != nil %>
+
 <table>
   <tr>
     <th>Title</th>
@@ -9,7 +9,6 @@
     <th></th>
     <th></th>
   </tr>
-<% @graph.get_object("me") %>
 <% @events.each do |event| %>
   <tr>
     <td><%= event.title %></td>
@@ -25,9 +24,3 @@
 <br />
 
 <%= link_to 'New Event', new_event_path %>
-
-<% else %>
-
-
-
-<%end%>
