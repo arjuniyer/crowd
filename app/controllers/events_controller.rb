@@ -1,23 +1,25 @@
 class EventsController < ApplicationController
   # GET /events
   # GET /events.xml
-
-
   def index
-
-
-    logger.info "Processing the request..."
-
+    
+    @fb_events = []
     if session[:access_token].present?
-      @graph = Koala::Facebook::API.new(session[:access_token])
-      @graph.get_object("me")
-    end    
-    @events = Event.all
-
+      @graph = Koala::Facebook::GraphAPI.new(session[:access_token])
+      @fb_events = @graph.get_object("me/events")
+        
+      @fb_events.each do  |event|
+        event.each_pair do |k,v|
+          puts k.to_s +  " : " + v.to_s
+        end
+      end
+    end
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
     end
+  
   end
 
   # GET /events/1
@@ -36,6 +38,19 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @event.uid = session[:fb_uid]
+	puts params[:fb_event_id]
+    
+    if session[:access_token].present?
+        @graph = Koala::Facebook::GraphAPI.new(session[:access_token])
+        @attendees = @graph.get_object("/" + params[:fb_event_id].to_s + "/attending")
+        
+        @attendees.each do  |person|
+          person.each_pair do |k,v|
+            puts k.to_s +  " : " + v.to_s
+          end
+        end
+    end
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -90,5 +105,6 @@ class EventsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end
 
