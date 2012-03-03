@@ -16,6 +16,7 @@
     <td><%= event['name'] %></td>
     <td><%= event['rsvp_status'] %></td>
     <td><%= event['start_time'] %></td>
+    <td><%= link_to 'Get Crowd Information', {:controller => "events", :action => "new", :fb_event_id => event['id'] } %></td>
   </tr>
 <% end %>
 </table>

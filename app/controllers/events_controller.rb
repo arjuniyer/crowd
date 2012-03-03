@@ -37,8 +37,20 @@ class EventsController < ApplicationController
   # GET /events/new
   # GET /events/new.xml
   def new
-    @event = Event.new
-
+    @event = Event.new    
+    puts params[:fb_event_id]
+    
+    if session[:access_token].present?
+        @graph = Koala::Facebook::GraphAPI.new(session[:access_token])
+        @attendees = @graph.get_object("/" + params[:fb_event_id].to_s + "/attending")
+        
+        @attendees.each do  |person|
+          person.each_pair do |k,v|
+            puts k.to_s +  " : " + v.to_s
+          end
+        end
+    end
+    
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }
@@ -93,5 +105,6 @@ class EventsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
 end
 
