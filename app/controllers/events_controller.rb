@@ -8,15 +8,19 @@ class EventsController < ApplicationController
     if session[:access_token].present?
       @graph = Koala::Facebook::GraphAPI.new(session[:access_token])
       @fb_events = @graph.get_object("me/events")
-      puts @fb_events
-    end
+        
+      @fb_events.each do  |event|
+        event.each_pair do |k,v|
+          puts k.to_s +  " : " + v.to_s
+        end
+      end
     
-    @events = Event.all
-
+    end
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @events }
     end
+  
   end
 
   # GET /events/1

@@ -3,20 +3,19 @@
 <table>
   <tr>
     <th>Title</th>
-    <th>Description</th>
-    <th>Likes</th>
+    <th>Are you going?</th>
+    <th>When does it start?</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-<% @events.each do |event| %>
+
+    
+<% @fb_events.each do |event| %>
   <tr>
-    <td><%= event.title %></td>
-    <td><%= event.description %></td>
-    <td><%= event.likes %></td>
-    <td><%= link_to 'Show', event %></td>
-    <td><%= link_to 'Edit', edit_event_path(event) %></td>
-    <td><%= link_to 'Destroy', event, :confirm => 'Are you sure?', :method => :delete %></td>
+    <td><%= event['name'] %></td>
+    <td><%= event['rsvp_status'] %></td>
+    <td><%= event['start_time'] %></td>
   </tr>
 <% end %>
 </table>
