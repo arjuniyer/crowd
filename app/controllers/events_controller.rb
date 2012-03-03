@@ -5,13 +5,12 @@ class EventsController < ApplicationController
 
   def index
 
-
-    logger.info "Processing the request..."
-
     if session[:access_token].present?
-      @graph = Koala::Facebook::GraphAPI.new(session[:access_ token])
-      @graph.get_object("me")
-    end    
+      @graph = Koala::Facebook::GraphAPI.new(session[:access_token])
+      @fb_events = @graph.get_object("me/events")
+      puts @fb_events
+    end
+    
     @events = Event.all
 
     respond_to do |format|
