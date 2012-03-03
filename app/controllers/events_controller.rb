@@ -9,7 +9,7 @@ class EventsController < ApplicationController
     logger.info "Processing the request..."
 
     if session[:access_token].present?
-      @graph = Koala::Facebook::GraphAPI.new(session[:access_ token])
+      @graph = Koala::Facebook::API.new(session[:access_token])
       @graph.get_object("me")
     end    
     @events = Event.all
@@ -35,7 +35,7 @@ class EventsController < ApplicationController
   # GET /events/new.xml
   def new
     @event = Event.new
-
+    @event.uid = session[:fb_uid]
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @event }

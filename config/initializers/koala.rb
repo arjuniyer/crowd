@@ -9,7 +9,7 @@ module Facebook
 end
 
 Koala.http_service.http_options = {
-  :ssl => { :ca_path => Rails.root.join('lib/assets/cacert.pem').to_s }
+  :ssl => { :ca_file => Rails.root.join('lib/assets/cacert.pem').to_s }
 }
 
 

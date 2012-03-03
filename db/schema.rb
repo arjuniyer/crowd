@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120203163400) do
+ActiveRecord::Schema.define(:version => 20120303201332) do
 
   create_table "events", :force => true do |t|
     t.string   "title"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20120203163400) do
     t.text     "likes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "uid"
   end
 
   create_table "users", :force => true do |t|
