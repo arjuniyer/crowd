@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  event_id: 
+  artist_name: MyString
+  number_of_likes: 
+
+two:
+  event_id: 
+  artist_name: MyString
+  number_of_likes: 

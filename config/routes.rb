@@ -1,5 +1,7 @@
 Crowd2::Application.routes.draw do
 
+  resources :likes
+
   root :to => "events#index"
 
   match "/auth/:provider/callback" => "oauth#create"
